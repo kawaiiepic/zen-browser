@@ -20,10 +20,14 @@ do_install() {
 		# link the binary
 		vmkdir usr/bin/
 		ln -s /usr/lib/zen-browser/zen ${DESTDIR}/usr/bin/
-}
 
-post_install() {
-		vinstall ${FILESDIR}/${pkgname}.desktop 644 usr/share/applications
+		for size in 16 32 48 64 128; do
+    		vinstall "browser/chrome/icons/default/default${size}.png" \
+        	644 "usr/share/icons/hicolor/${size}x${size}/apps" \
+        	zen-browser.png
+		done
+
+		vinstall "${FILESDIR}/${pkgname}.desktop" 644 usr/share/applications
 }
 
 
